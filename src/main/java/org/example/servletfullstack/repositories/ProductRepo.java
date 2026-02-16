@@ -14,7 +14,7 @@ public class ProductRepo {
 
     /**
      * Returns the reference to a ProductRepo object
-     * @return productRepo object
+     * @return ProductRepo object
      */
     synchronized public static ProductRepo getProductRepo() {
         if (productRepo == null) productRepo = new ProductRepo();
