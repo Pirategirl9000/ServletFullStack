@@ -56,6 +56,7 @@ public class ProductController extends HttpServlet {
      */
     public void destroy() {
         productService.destroy();
+
     }
 
 
