@@ -25,4 +25,11 @@ public class ProductService {
 
         return productService;
     }
+
+    /**
+     * Shuts down the service class
+     */
+    public void destroy() {
+
+    }
 }

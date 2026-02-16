@@ -55,8 +55,7 @@ public class ProductController extends HttpServlet {
      * Code that runs when Servlet is being terminated
      */
     public void destroy() {
-
-
+        productService.destroy();
     }
 
 
