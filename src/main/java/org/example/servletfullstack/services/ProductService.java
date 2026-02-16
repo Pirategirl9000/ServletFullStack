@@ -25,6 +25,14 @@ public class ProductService {
     }
 
     /**
+     * Returns all products in a JSON formatted string
+     * @return JSON formatted string
+     */
+    public String getProducts() {
+
+    }
+
+    /**
      * Shuts down the service class
      */
     public void destroy() {
