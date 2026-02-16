@@ -19,9 +19,7 @@ public class ProductService {
      * @return ProductService object
      */
     public static ProductService getProductService() {
-        if (productService == null) {
-            productService = new ProductService();
-        }
+        if (productService == null) productService = new ProductService();
 
         return productService;
     }
