@@ -18,7 +18,7 @@ public class ProductService {
      * Returns the reference to a ProductService object
      * @return ProductService object
      */
-    public static ProductService getProductService() {
+    synchronized public static ProductService getProductService() {
         if (productService == null) productService = new ProductService();
 
         return productService;
