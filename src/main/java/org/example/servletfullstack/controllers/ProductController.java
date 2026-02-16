@@ -1,4 +1,4 @@
-package org.example.servletfullstack;
+package org.example.servletfullstack.controllers;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
