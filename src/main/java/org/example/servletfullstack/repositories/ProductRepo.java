@@ -1,5 +1,8 @@
 package org.example.servletfullstack.repositories;
 
+// contains sensitive database configuration details
+// This is why it is not included in the GitHub repository
+import org.example.resources.DatabaseConfig;
 
 public class ProductRepo {
     /**
@@ -10,7 +13,9 @@ public class ProductRepo {
     /**
      * A private constructor for ProductRepo to acheive singleton status
      */
-    private ProductRepo() {}
+    private ProductRepo() {
+
+    }
 
     /**
      * Returns the reference to a ProductRepo object
