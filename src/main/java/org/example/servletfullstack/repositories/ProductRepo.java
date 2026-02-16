@@ -23,7 +23,7 @@ public class ProductRepo {
     }
 
     /**
-     * Shuts down the service class
+     * Shuts down the JDBC connection
      */
     public void destroy() {
 
