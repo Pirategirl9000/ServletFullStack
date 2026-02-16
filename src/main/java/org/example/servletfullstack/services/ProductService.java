@@ -7,7 +7,7 @@ public class ProductService {
     /**
      * The singleton instance of the ProductService
      */
-    private ProductService productService;
+    private static ProductService productService;
 
     /**
      * A private constructor for ProductService to acheive singleton status
@@ -18,7 +18,7 @@ public class ProductService {
      * Returns the reference to a ProductService object
      * @return ProductService object
      */
-    public ProductService getProductService() {
+    public static ProductService getProductService() {
         if (productService == null) {
             productService = new ProductService();
         }
