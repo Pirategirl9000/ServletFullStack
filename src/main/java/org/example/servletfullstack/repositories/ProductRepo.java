@@ -25,9 +25,12 @@ public class ProductRepo {
      */
     private ProductRepo() {
         try {
+            Class.forName("org.postgresql.Driver");
             this.conn = DriverManager.getConnection(DatabaseConfig.getURL(), DatabaseConfig.getUser(), DatabaseConfig.getPassword());
         } catch (SQLException e) {
             throw new RuntimeException("Error establishing connection to database: " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Could not find PostgreSQL JDBC driver: " + e.getMessage());
         }
     }
 
