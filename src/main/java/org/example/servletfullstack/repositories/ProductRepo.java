@@ -41,13 +41,19 @@ public class ProductRepo {
         return productRepo;
     }
 
-    public List<Product> getProducts() {
+    /**
+     * Queries the database for all products and returns a list of Product objects
+     * @return list of product objects
+     */
+    public List<Product> getAllProducts() {
         try {
+            // Prepare and execute a statement to query the database for all products
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("select * from products");
 
             List<Product> products = new ArrayList<>();
 
+            // Go through every row of data and create a product from it to add to the array
             while (rs.next()) {
                 products.add(
                         new Product(
