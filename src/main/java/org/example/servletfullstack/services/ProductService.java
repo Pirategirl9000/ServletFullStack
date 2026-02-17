@@ -51,6 +51,6 @@ public class ProductService {
      * Shuts down the service class
      */
     public void destroy() {
-
+        productRepo.destroy();
     }
 }
