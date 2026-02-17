@@ -93,7 +93,11 @@ public class ProductRepo {
         try {
             // Prepare and execute a statement to query the database for all products
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from products");
+            ResultSet rs = stmt.executeQuery(
+                    "select p.*, JSON_AGG(c.category_name) AS categories from products p " +
+                        "INNER JOIN categories c ON p.product_id = c.product_id " +
+                        "GROUP BY p.product_id;"
+            );
 
             // Go through every row of data and create a product from it to add to the array
             while (rs.next()) {
@@ -102,7 +106,10 @@ public class ProductRepo {
                                 rs.getInt("product_id"),
                                 rs.getString("product_name"),
                                 rs.getString("product_desc"),
-                                rs.getDouble("product_price")
+                                rs.getDouble("product_price"),
+                                rs.getString("categories")                      // Get the categories as a string
+                                        .replaceAll("[\\[\\]\" ]", "")    // Remove brackets, quotations, and spaces
+                                        .split(",")                                  // Return the String as a string array
                         )
                 );
             }
@@ -111,7 +118,7 @@ public class ProductRepo {
             stmt.close();
             conn.close();
         } catch (SQLException e) {
-            try {conn.close();} catch (SQLException _) {}  // No need to toss another error since they already have one coming
+            try {conn.close();} catch (SQLException b) {}  // No need to toss another error since they already have one coming
             throw new RuntimeException("Error executing query: " + e.getMessage());
         }
 
