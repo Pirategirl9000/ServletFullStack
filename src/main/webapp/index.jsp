@@ -5,6 +5,8 @@
     <title>Fullstack with Servlets</title>
 </head>
     <body>
-
+        <form method="get" action="product-controller">
+            <input type="submit">
+        </form>
     </body>
 </html>
