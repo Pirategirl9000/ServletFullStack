@@ -3,9 +3,13 @@ package org.example.servletfullstack.repositories;
 // contains sensitive database configuration details
 // This is why it is not included in the GitHub repository
 import org.example.resources.DatabaseConfig;
-import org.example.servletfullstack.repositories.objects.Product;
 
-import java.sql.*;
+import org.example.servletfullstack.repositories.objects.Product;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
