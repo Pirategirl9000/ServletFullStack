@@ -12,6 +12,9 @@ public class ProductService {
      */
     private static ProductService productService;
 
+    /**
+     * Reference to the Product Repository which handles the database
+     */
     private ProductRepo productRepo;
 
     /**
