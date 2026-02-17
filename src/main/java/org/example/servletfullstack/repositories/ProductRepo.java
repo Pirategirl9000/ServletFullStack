@@ -30,6 +30,16 @@ public class ProductRepo {
     private List<Product> products;
 
     /**
+     * Tracks the last time the database was queried
+     */
+    private long lastUpdate;
+
+    /**
+     * How much time must pass before we will update the memoized values
+     */
+    private final long DURATIONTILLUPDATE = 600_000_000_000L;  // 10 Minutes
+
+    /**
      * A private constructor for ProductRepo to acheive singleton status, initializes the database connection
      */
     private ProductRepo() {
@@ -59,7 +69,9 @@ public class ProductRepo {
      */
     public List<Product> getAllProducts() {
         // If we have already fetched the products from the database we just return the memoized list
-        if (this.products.isEmpty()) {
+        // We will pull from the database again based on how much time has passed just in case the database updates
+        // during uptime
+        if (this.products == null || System.nanoTime() - this.lastUpdate >= DURATIONTILLUPDATE) {
             fetchProducts();
         }
 
@@ -91,6 +103,9 @@ public class ProductRepo {
         } catch (SQLException e) {
             throw new RuntimeException("Error executing query: " + e.getMessage());
         }
+
+        // Track the last time we updated our memoized data
+        this.lastUpdate = System.nanoTime();
     }
 
     /**
