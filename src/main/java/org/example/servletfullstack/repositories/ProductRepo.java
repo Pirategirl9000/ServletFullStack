@@ -116,7 +116,7 @@ public class ProductRepo {
             stmt.close();
             conn.close();
         } catch (SQLException e) {
-            try {conn.close();} catch (SQLException b) {}  // No need to toss another error since they already have one coming
+            try {conn.close();} catch (SQLException b) {throw new RuntimeException("Error executing query and closing connection: " + e.getMessage());}
             throw new RuntimeException("Error executing query: " + e.getMessage());
         }
 
