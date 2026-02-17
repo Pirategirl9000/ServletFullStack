@@ -34,6 +34,7 @@ public class ProductController extends HttpServlet {
      * @throws IOException if an error occurs during IO
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String products = this.productService.getProducts();
 
 
     }
