@@ -46,11 +46,4 @@ public class ProductService {
     public String getProducts() {
         return JSONParser.toJson(productRepo.getAllProducts());
     }
-
-    /**
-     * Shuts down the service class
-     */
-    public void destroy() {
-        productRepo.destroy();
-    }
 }
