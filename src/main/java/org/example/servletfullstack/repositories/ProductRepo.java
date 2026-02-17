@@ -46,6 +46,10 @@ public class ProductRepo {
         }
     }
 
+    /**
+     * Returns a JDBC Connection to the database
+     * @return Connection object tied to the database
+     */
     private Connection getConnection() {
         try {
             return DriverManager.getConnection(DatabaseConfig.getURL(), DatabaseConfig.getUser(), DatabaseConfig.getPassword());
