@@ -2,11 +2,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Fullstack with Servlets</title>
+    <title>Servlets Home</title>
 </head>
     <body>
-        <form method="get" action="product-controller">
-            <input type="submit">
-        </form>
+    <nav>
+        <ul>
+            <li><a href="index.jsp">Home</a></li>
+            <li><a href="browse.jsp">Browse</a></li>
+            <li><a href="about.jsp">About</a></li>
+            <li><a href="contact.jsp">Contact Us</a></li>
+        </ul>
+    </nav>
+    <h1>Home</h1>
     </body>
 </html>
