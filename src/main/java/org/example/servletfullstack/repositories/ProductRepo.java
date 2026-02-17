@@ -76,9 +76,7 @@ public class ProductRepo {
         // If we have already fetched the products from the database we just return the memoized list
         // We will pull from the database again based on how much time has passed just in case the database updates
         // during uptime
-        if (this.products == null || System.nanoTime() - this.lastUpdate >= DURATIONTILLUPDATE) {
-            this.products = fetchProducts();
-        }
+        if (this.products == null || System.nanoTime() - this.lastUpdate >= DURATIONTILLUPDATE) this.products = fetchProducts();
 
         return this.products;
     }
