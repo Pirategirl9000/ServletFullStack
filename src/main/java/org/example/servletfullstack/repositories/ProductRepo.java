@@ -25,6 +25,11 @@ public class ProductRepo {
     private Connection conn;
 
     /**
+     * A list of all the prodcuts in the database
+     */
+    private List<Product> products;
+
+    /**
      * A private constructor for ProductRepo to acheive singleton status, initializes the database connection
      */
     private ProductRepo() {
@@ -53,16 +58,28 @@ public class ProductRepo {
      * @return list of product objects
      */
     public List<Product> getAllProducts() {
+        // If we have already fetched the products from the database we just return the memoized list
+        if (this.products.isEmpty()) {
+            fetchProducts();
+        }
+
+        return this.products;
+    }
+
+    /**
+     * Fetches all products from the database and assigns them to the products attribute
+     */
+    private void fetchProducts() {
+        this.products = new ArrayList<>();
+
         try {
             // Prepare and execute a statement to query the database for all products
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("select * from products");
 
-            List<Product> products = new ArrayList<>();
-
             // Go through every row of data and create a product from it to add to the array
             while (rs.next()) {
-                products.add(
+                this.products.add(
                         new Product(
                                 rs.getInt("product_id"),
                                 rs.getString("product_name"),
@@ -71,9 +88,6 @@ public class ProductRepo {
                         )
                 );
             }
-
-            return products;
-
         } catch (SQLException e) {
             throw new RuntimeException("Error executing query: " + e.getMessage());
         }
