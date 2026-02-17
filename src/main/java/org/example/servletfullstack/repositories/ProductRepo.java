@@ -20,11 +20,6 @@ public class ProductRepo {
     private static ProductRepo productRepo;
 
     /**
-     * The connection to the database
-     */
-    private volatile Connection conn;
-
-    /**
      * A list of all the prodcuts in the database
      */
     private volatile List<Product> products;
@@ -43,83 +38,79 @@ public class ProductRepo {
      * A private constructor for ProductRepo to acheive singleton status, initializes the database connection
      */
     private ProductRepo() {
+        // Set up the driver for PostgreSQL
         try {
             Class.forName("org.postgresql.Driver");
-            this.conn = DriverManager.getConnection(DatabaseConfig.getURL(), DatabaseConfig.getUser(), DatabaseConfig.getPassword());
-        } catch (SQLException e) {
-            throw new RuntimeException("Error establishing connection to database: " + e.getMessage());
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException("Could not find PostgreSQL JDBC driver: " + e.getMessage());
+            throw new RuntimeException("Could not load PostgreSQL driver", e);
         }
     }
 
-    /**
-     * Returns the reference to a ProductRepo object
-     * @return ProductRepo object
-     */
-    synchronized public static ProductRepo getProductRepo() {
-        if (productRepo == null) productRepo = new ProductRepo();
+private Connection getConnection() {
+    try {
+        return DriverManager.getConnection(DatabaseConfig.getURL(), DatabaseConfig.getUser(), DatabaseConfig.getPassword());
+    } catch (SQLException e) {
+        throw new RuntimeException("Error establishing connection to database: " + e.getMessage());
+    }
+}
 
-        return productRepo;
+/**
+ * Returns the reference to a ProductRepo object
+ * @return ProductRepo object
+ */
+synchronized public static ProductRepo getProductRepo() {
+    if (productRepo == null) productRepo = new ProductRepo();
+
+    return productRepo;
+}
+
+/**
+ * Queries the database for all products and returns a list of Product objects
+ * @return list of product objects
+ */
+synchronized public List<Product> getAllProducts() {
+    // If we have already fetched the products from the database we just return the memoized list
+    // We will pull from the database again based on how much time has passed just in case the database updates
+    // during uptime
+    if (this.products == null || System.nanoTime() - this.lastUpdate >= DURATIONTILLUPDATE) {
+        this.products = fetchProducts();
     }
 
-    /**
-     * Queries the database for all products and returns a list of Product objects
-     * @return list of product objects
-     */
-    synchronized public List<Product> getAllProducts() {
-        // If we have already fetched the products from the database we just return the memoized list
-        // We will pull from the database again based on how much time has passed just in case the database updates
-        // during uptime
-        if (this.products == null || System.nanoTime() - this.lastUpdate >= DURATIONTILLUPDATE) {
-            this.products = fetchProducts();
+    return this.products;
+}
+
+/**
+ * Fetches all products from the database and assigns them to the products attribute
+ */
+synchronized private List<Product> fetchProducts() {
+    List<Product> newList = new ArrayList<>();
+    Connection conn = getConnection();
+
+    try {
+        // Prepare and execute a statement to query the database for all products
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("select * from products");
+
+        // Go through every row of data and create a product from it to add to the array
+        while (rs.next()) {
+            newList.add(
+                    new Product(
+                            rs.getInt("product_id"),
+                            rs.getString("product_name"),
+                            rs.getString("product_desc"),
+                            rs.getDouble("product_price")
+                    )
+            );
         }
 
-        return this.products;
+        rs.close();
+        stmt.close();
+    } catch (SQLException e) {
+        throw new RuntimeException("Error executing query: " + e.getMessage());
     }
 
-    /**
-     * Fetches all products from the database and assigns them to the products attribute
-     */
-    synchronized private List<Product> fetchProducts() {
-        List<Product> newList = new ArrayList<>();
-
-        try {
-            // Prepare and execute a statement to query the database for all products
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from products");
-
-            // Go through every row of data and create a product from it to add to the array
-            while (rs.next()) {
-                newList.add(
-                        new Product(
-                                rs.getInt("product_id"),
-                                rs.getString("product_name"),
-                                rs.getString("product_desc"),
-                                rs.getDouble("product_price")
-                        )
-                );
-            }
-
-            rs.close();
-            stmt.close();
-        } catch (SQLException e) {
-            throw new RuntimeException("Error executing query: " + e.getMessage());
-        }
-
-        // Track the last time we updated our memoized data
-        this.lastUpdate = System.nanoTime();
-        return newList;
-    }
-
-    /**
-     * Shuts down the JDBC connection
-     */
-    public void destroy() {
-        try {
-            conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException("Error closing connection: " + e.getMessage());
-        }
-    }
+    // Track the last time we updated our memoized data
+    this.lastUpdate = System.nanoTime();
+    return newList;
+}
 }
