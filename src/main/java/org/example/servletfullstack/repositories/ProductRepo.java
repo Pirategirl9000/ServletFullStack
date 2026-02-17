@@ -22,17 +22,17 @@ public class ProductRepo {
     /**
      * The connection to the database
      */
-    private Connection conn;
+    private volatile Connection conn;
 
     /**
      * A list of all the prodcuts in the database
      */
-    private List<Product> products;
+    private volatile List<Product> products;
 
     /**
      * Tracks the last time the database was queried
      */
-    private long lastUpdate;
+    private volatile long lastUpdate;
 
     /**
      * How much time must pass before we will update the memoized values
@@ -67,12 +67,12 @@ public class ProductRepo {
      * Queries the database for all products and returns a list of Product objects
      * @return list of product objects
      */
-    public List<Product> getAllProducts() {
+    synchronized public List<Product> getAllProducts() {
         // If we have already fetched the products from the database we just return the memoized list
         // We will pull from the database again based on how much time has passed just in case the database updates
         // during uptime
         if (this.products == null || System.nanoTime() - this.lastUpdate >= DURATIONTILLUPDATE) {
-            fetchProducts();
+            this.products = fetchProducts();
         }
 
         return this.products;
@@ -81,8 +81,8 @@ public class ProductRepo {
     /**
      * Fetches all products from the database and assigns them to the products attribute
      */
-    private void fetchProducts() {
-        this.products = new ArrayList<>();
+    synchronized private List<Product> fetchProducts() {
+        List<Product> newList = new ArrayList<>();
 
         try {
             // Prepare and execute a statement to query the database for all products
@@ -91,7 +91,7 @@ public class ProductRepo {
 
             // Go through every row of data and create a product from it to add to the array
             while (rs.next()) {
-                this.products.add(
+                newList.add(
                         new Product(
                                 rs.getInt("product_id"),
                                 rs.getString("product_name"),
@@ -109,6 +109,7 @@ public class ProductRepo {
 
         // Track the last time we updated our memoized data
         this.lastUpdate = System.nanoTime();
+        return newList;
     }
 
     /**
