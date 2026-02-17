@@ -100,6 +100,9 @@ public class ProductRepo {
                         )
                 );
             }
+
+            rs.close();
+            stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException("Error executing query: " + e.getMessage());
         }
