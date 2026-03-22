@@ -44,6 +44,13 @@ public class EmailService {
         return emailService;
     }
 
+    /**
+     * Sends an email to the configured mailing address
+     * @param sender who's sending the email
+     * @param subject the subject line
+     * @param text the content of the email
+     * @return whether the email was sent successfully
+     */
     synchronized public boolean sendEmail(String sender, String subject, String text) {
         final String PASSWORD = MailConfig.PASSWORD;
         final String FROM = MailConfig.FROM;            // We don't send the email from the senders address but instead one of ours
