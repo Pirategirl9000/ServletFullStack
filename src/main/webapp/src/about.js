@@ -8,9 +8,16 @@ document.addEventListener("DOMContentLoaded", ()=>{
         image.addEventListener("click", ()=>location.href=image.getAttribute("data-link"));
     }
 
-    const copyButton = document.getElementById("schema-button");
+    const copyButton = document.querySelector("#schema-button");
 
     copyButton.addEventListener("click", ()=>{
         navigator.clipboard.writeText(copyButton.nextElementSibling.textContent);
+    })
+
+    const showSchemaButton = document.querySelector("#show-schema-button");
+    const schemaSection = document.querySelector("#schema");
+
+    showSchemaButton.addEventListener("click", ()=>{
+        schemaSection.classList.toggle("is-hidden");
     })
 })

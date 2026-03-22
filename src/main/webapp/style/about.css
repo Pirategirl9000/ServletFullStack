@@ -30,10 +30,24 @@
     height: 3em;
 }
 
+#show-schema-button {
+    border-radius: 2em;
+    border: 1px solid black;
+}
+
+#show-schema-button:hover {
+    cursor: pointer;
+}
+
 #schema {
+    margin-top: 1em;
     background: grey;
     border-radius: 3em;
     padding: 1em 0;
+}
+
+.is-hidden {
+    display: none;
 }
 
 #schema-button {
@@ -52,6 +66,7 @@
 }
 
 #schema p {
-    padding: 0.5em;
+    padding: 1em;
+    margin: 0;
     white-space: preserve-breaks;
 }
