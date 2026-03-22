@@ -1,0 +1,31 @@
+.section {
+    padding: 1em;
+}
+
+.section p {
+    font-size: 1.3em;
+}
+
+.section h3 {
+    display: inline;
+    font-size: 2em;
+}
+
+.section img:hover {
+    cursor: pointer;
+}
+
+#tomcat-logo {
+    width: 4em;
+    height: 3em;
+}
+
+#servlet-logo {
+    width: 3em;
+    height: 4em;
+}
+
+#postgres-logo {
+    width: 3em;
+    height: 3em;
+}
