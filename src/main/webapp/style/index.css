@@ -1,0 +1,13 @@
+nav {
+    background: cornflowerblue;
+    padding: 1em 0;
+}
+
+nav div:hover {
+    background: dodgerblue;
+}
+
+nav div {
+    display: inline;
+    padding: 1em;
+}
