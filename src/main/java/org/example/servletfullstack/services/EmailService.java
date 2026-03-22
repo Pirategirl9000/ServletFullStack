@@ -6,7 +6,6 @@ import jakarta.mail.Session;
 import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
-import org.example.servletfullstack.repositories.ProductRepo;
 import org.example.resources.MailConfig;
 
 import java.util.Properties;
@@ -23,7 +22,7 @@ public class EmailService {
     /**
      * The properties for the email session
      */
-    private Properties props = new Properties();
+    private final Properties props = new Properties();
 
     /**
      * A private constructor for EmailService to acheive singleton status
