@@ -1,5 +1,15 @@
 document.addEventListener("DOMContentLoaded", ()=>{
+    // Used for adding image links to documentation pages
     const images = document.querySelectorAll("img");
+
+    // Used for copying the schema
+    const copyButton = document.querySelector("#schema-button");
+    const copyConfirm = copyButton.nextElementSibling;
+    const schemaDataElement = document.querySelector("#schema-data");
+
+    // Used for showing schema information
+    const showSchemaButton = document.querySelector("#show-schema-button");
+    const schemaSection = document.querySelector("#schema");
 
     // Attach links to images
     for (const image of images) {
@@ -8,10 +18,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         image.addEventListener("click", ()=>location.href=image.getAttribute("data-link"));
     }
 
-    const copyButton = document.querySelector("#schema-button");
-    const copyConfirm = copyButton.nextElementSibling;
-    const schemaDataElement = document.querySelector("#schema-data");
-
+    // Attach listener for copying schema text
     copyButton.addEventListener("click",  ()=>{
         navigator.clipboard.writeText(schemaDataElement.textContent)
             .then(()=>{
@@ -28,10 +35,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
         });
     })
 
-    const showSchemaButton = document.querySelector("#show-schema-button");
-    const schemaSection = document.querySelector("#schema");
-
-    showSchemaButton.addEventListener("click", ()=>{
-        schemaSection.classList.toggle("is-hidden");
-    })
+    // Attach listener to the show schema button to toggle the visibility of the schema
+    showSchemaButton.addEventListener("click", ()=>schemaSection.classList.toggle("is-hidden"));
 })
