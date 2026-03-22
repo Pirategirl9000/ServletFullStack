@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const copyConfirm = copyButton.nextElementSibling;
     const schemaDataElement = document.querySelector("#schema-data");
 
-    copyButton.addEventListener("click", async ()=>{
+    copyButton.addEventListener("click",  ()=>{
         navigator.clipboard.writeText(schemaDataElement.textContent)
             .then(()=>{
                 // Success at copying
