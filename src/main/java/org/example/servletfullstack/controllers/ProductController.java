@@ -13,7 +13,7 @@ import java.io.PrintWriter;
 /**
  * Handles HTTP requests sent to the server and delegates the work to the service layer
  */
-@WebServlet(name = "productController", value = "/product-controller")
+@WebServlet(name = "productController", value = "/servletfullstack/api/products")
 public class ProductController extends HttpServlet {
     /**
      * Handles the operations related to requests the controller recieves
