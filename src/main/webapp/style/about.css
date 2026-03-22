@@ -29,3 +29,29 @@
     width: 3em;
     height: 3em;
 }
+
+#schema {
+    background: grey;
+    border-radius: 3em;
+    padding: 1em 0;
+}
+
+#schema-button {
+    display: flex;
+    background: darkgrey;
+    padding: 1em;
+    justify-content: flex-end;
+    margin-left: auto;
+    margin-right: 2em;
+    border-radius: 2em;
+    border: 1px solid black;
+}
+
+#schema-button:hover {
+    cursor: pointer;
+}
+
+#schema p {
+    padding: 0.5em;
+    white-space: preserve-breaks;
+}
