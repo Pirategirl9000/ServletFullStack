@@ -7,4 +7,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
         image.addEventListener("click", ()=>location.href=image.getAttribute("data-link"));
     }
+
+    const copyButton = document.getElementById("schema-button");
+
+    copyButton.addEventListener("click", ()=>{
+        navigator.clipboard.writeText(copyButton.nextElementSibling.textContent);
+    })
 })
