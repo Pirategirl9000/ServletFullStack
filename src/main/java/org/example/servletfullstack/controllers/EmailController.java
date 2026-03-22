@@ -1,0 +1,51 @@
+package org.example.servletfullstack.controllers;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.example.servletfullstack.services.EmailService;
+import org.example.servletfullstack.services.ProductService;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+/**
+ * Handles HTTP requests sent to the server and delegates the work to the service layer
+ */
+@WebServlet(name = "productController", value = "/servletfullstack/api/email")
+public class EmailController extends HttpServlet {
+    /**
+     * Handles the operations related to requests the controller recieves
+     */
+    private EmailService emailService;
+
+    /**
+     * Code that runs when the Servlet is initialilized
+     */
+    public void init() {
+        this.emailService = EmailService.getEmailService();
+    }
+
+    /**
+     * Handles the POST requests
+     * @param request the request sent
+     * @param response the response to send
+     * @throws ServletException if an error with the servlet occurs
+     * @throws IOException if an error occurs during IO
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+
+    }
+
+    /**
+     * Code that runs when Servlet is being terminated
+     */
+    public void destroy() {
+    }
+
+
+}
