@@ -1,13 +1,34 @@
+body {
+    background: #e4f1fe;
+    display: inline;
+    margin: 0;
+}
+
 nav {
-    background: cornflowerblue;
-    padding: 1em 0;
+    background: dodgerblue;
+    margin: 0;
+    display: flex;
+    border: 1px solid black;
 }
 
 nav div:hover {
-    background: dodgerblue;
+    background: cornflowerblue;
+    cursor: pointer;
 }
 
 nav div {
     display: inline;
     padding: 1em;
+    width: 25%;
+    text-align: center;
+    font-size: 1em;
+    border-right: 1px solid black;
+}
+
+h1 {
+    padding-left: 0.5em;
+}
+
+p {
+    padding-left: 2em;
 }
