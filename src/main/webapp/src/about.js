@@ -9,9 +9,23 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }
 
     const copyButton = document.querySelector("#schema-button");
+    const copyConfirm = copyButton.nextElementSibling;
+    const schemaDataElement = document.querySelector("#schema-data");
 
-    copyButton.addEventListener("click", ()=>{
-        navigator.clipboard.writeText(copyButton.nextElementSibling.textContent);
+    copyButton.addEventListener("click", async ()=>{
+        navigator.clipboard.writeText(schemaDataElement.textContent)
+            .then(()=>{
+                // Success at copying
+                copyConfirm.textContent = "Copied";
+            })
+            .catch(()=>{
+                // Failed to copy
+                copyConfirm.textContent = "Failed to Copy";
+            })
+            // Either way show the result
+            .finally(()=>{
+                copyConfirm.classList.remove("is-hidden");
+        });
     })
 
     const showSchemaButton = document.querySelector("#show-schema-button");
