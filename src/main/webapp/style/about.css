@@ -11,7 +11,7 @@
     font-size: 2em;
 }
 
-.section img:hover {
+.section img:hover[data-link] {
     cursor: pointer;
 }
 
