@@ -37,4 +37,4 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     // Attach listener to the show schema button to toggle the visibility of the schema
     showSchemaButton.addEventListener("click", ()=>schemaSection.classList.toggle("is-hidden"));
-})
+});
