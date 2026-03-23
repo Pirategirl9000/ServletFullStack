@@ -67,9 +67,10 @@ public class EmailService {
         });
 
         try {
+            // Create the blank message
             MimeMessage message = new MimeMessage(session);
 
-            // Set up the email
+            // Set up the email message
             message.setFrom(new InternetAddress(FROM));
             message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(TO));
             message.setSubject(subject);
