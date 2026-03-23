@@ -1,3 +1,7 @@
+form {
+    padding-left: 0.5em;
+}
+
 span {
      color: red;
 }
@@ -5,4 +9,13 @@ span {
 #body {
     width: 500px;
     height: 500px;
+}
+
+textarea {
+    box-sizing: border-box;
+    margin-left: 0.2em;
+}
+
+input[type="submit"] {
+    margin-left: 0.2em;
 }
