@@ -1,5 +1,4 @@
 async function handleForm(e) {
-    console.log("form submit");
     e.preventDefault();  // We need to set up the request ourselves with a body
 
     let valid = true;
