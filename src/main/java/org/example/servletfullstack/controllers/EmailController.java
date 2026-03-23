@@ -62,6 +62,12 @@ public class EmailController extends HttpServlet {
         final String subject = requestBody.subject();
         final String body = requestBody.body();
 
+        // If any data was missing we send a bad request error
+        if (sender == null || subject == null || body == null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Bad Request");
+            return;
+        }
+
         final boolean success = emailService.sendEmail(sender, subject, body);
 
         response.setContentType("text/plain");
