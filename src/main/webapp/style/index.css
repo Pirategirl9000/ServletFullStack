@@ -1,9 +1,14 @@
-body {
-    background: #e4f1fe;
+h1 {
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    background: darkturquoise;
+    padding: 0.5em;
 }
 
-h1 {
-    padding-left: 0.5em;
+body {
+    background: #e4f1fe;
 }
 
 p {
