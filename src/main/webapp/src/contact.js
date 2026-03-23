@@ -10,9 +10,6 @@ async function handleForm(e) {
     if (!sender.value) {
         valid = false;
         sender.nextElementSibling.textContent = "Required";
-    } else if (!(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(sender))) {  // Is not a valid email
-        valid = false;
-        sender.nextElementSibling.textContent = "Must be a valid email"
     } else {
         sender.nextElementSibling.textContent = "";
     }
