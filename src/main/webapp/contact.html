@@ -11,5 +11,22 @@
 <nav></nav>
 <script src="src/setupNavBar.js"></script>
 
+<h1>Contact Us</h1>
+
+<form action="localhost:8080/ServletFullStack_war_exploded/api/email" method="post">
+    <label for="from">From: </label>
+    <input id="from" name="from" type="email">
+    <br>
+
+    <label for="subject">Subject: </label>
+    <input id="subject" name="subject" type="text">
+    <br>
+
+    <label for="body">Body: </label>
+    <input id="body" name="body" type="text">
+
+    <input id="submit" type="submit">
+</form>
+
 </body>
 </html>
