@@ -6,7 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.servletfullstack.controllers.Objects.EmailRequest;
+import org.example.servletfullstack.controllers.objects.EmailRequest;
 import org.example.servletfullstack.services.EmailService;
 
 import java.io.BufferedReader;
