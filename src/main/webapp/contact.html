@@ -13,20 +13,27 @@
 
 <h1>Contact Us</h1>
 
-<form action="localhost:8080/ServletFullStack_war_exploded/api/email" method="post">
+<form id="email-form" method="POST">
     <label for="from">From: </label>
     <input id="from" name="from" type="email">
+    <span>*</span>
     <br>
 
     <label for="subject">Subject: </label>
     <input id="subject" name="subject" type="text">
+    <span>*</span>
     <br>
 
     <label for="body">Body: </label>
     <input id="body" name="body" type="text">
+    <span>*</span>
 
     <input id="submit" type="submit">
 </form>
+
+<p id="email-confirm"></p>
+
+<script src="src/contact.js"></script>
 
 </body>
 </html>
