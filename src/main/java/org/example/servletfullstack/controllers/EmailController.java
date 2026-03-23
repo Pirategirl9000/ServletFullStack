@@ -1,12 +1,15 @@
 package org.example.servletfullstack.controllers;
 
+import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.servletfullstack.controllers.Objects.EmailRequest;
 import org.example.servletfullstack.services.EmailService;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -35,14 +38,34 @@ public class EmailController extends HttpServlet {
      * @throws IOException if an error occurs during IO
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        final String sender = request.getParameter("from");
-        final String subject = request.getParameter("subject");
-        final String body = request.getParameter("body");
+        // Set up to read the request body
+        BufferedReader reader = request.getReader();
+        StringBuilder sb = new StringBuilder();
+        String line;
+
+        // Grab the request's body
+        while ((line = reader.readLine()) != null) {
+            sb.append(line);
+        }
+
+        // The JSON of the request body
+        String json = sb.toString();
+
+        // Set up a JSON parser
+        Gson gson = new Gson();
+
+        // Parse the JSON into a data carrier class for easy accessing
+        EmailRequest requestBody = gson.fromJson(json, EmailRequest.class);
+
+        // Grab the values of the body so we can send our email
+        final String sender = requestBody.from();
+        final String subject = requestBody.subject();
+        final String body = requestBody.body();
+
+        final boolean success = emailService.sendEmail(sender, subject, body);
 
         response.setContentType("text/plain");
         PrintWriter out = response.getWriter();
-
-        final boolean success = emailService.sendEmail(sender, subject, body);
 
         if (success) {
             out.println("Email sent!");
