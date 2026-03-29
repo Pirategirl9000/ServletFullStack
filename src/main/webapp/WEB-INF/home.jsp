@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="style/fonts.css" rel="stylesheet">
-    <link rel="stylesheet" href="style/index.css">
-    <link rel="stylesheet" href="style/navbar.css">
+    <link href="../style/fonts.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style/index.css">
+    <link rel="stylesheet" href="../style/navbar.css">
     <title>Servlets Home</title>
 </head>
 <body>
 
 <nav></nav>
-<script src="src/setupNavBar.js"></script>
+<script src="../src/setupNavBar.js"></script>
 
 
 

@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Servlets About</title>
-    <link href="style/fonts.css" rel="stylesheet">
-    <link href="style/about.css" rel="stylesheet">
-    <link href="style/navbar.css" rel="stylesheet">
+    <link href="../style/fonts.css" rel="stylesheet">
+    <link href="../style/about.css" rel="stylesheet">
+    <link href="../style/navbar.css" rel="stylesheet">
 </head>
 
 <body>
     <nav></nav>
-    <script src="src/setupNavBar.js"></script>
+    <script src="../src/setupNavBar.js"></script>
 
     <h1>About</h1>
 
     <div>
         <div class="section">
-            <img data-link="https://tomcat.apache.org/" id="tomcat-logo" src="resources/tomcat.png" alt="Tomcat Logo">
+            <img data-link="https://tomcat.apache.org/" id="tomcat-logo" src="../resources/tomcat.png" alt="Tomcat Logo">
             <h3>Tomcat</h3>
 
             <p>
@@ -33,7 +33,7 @@
         </div>
 
         <div class="section">
-            <img data-link="https://jakarta.ee/release/11/" id="servlet-logo" src="resources/jakarta-logo.svg" alt="Java logo">
+            <img data-link="https://jakarta.ee/release/11/" id="servlet-logo" src="../resources/jakarta-logo.svg" alt="Java logo">
             <h3>Jakarta Servlets</h3>
 
             <p>
@@ -50,7 +50,7 @@
         </div>
 
         <div class="section">
-            <img data-link="https://www.postgresql.org/" id="postgres-logo" src="resources/postgres-logo.png" alt="PostgreSQL Logo">
+            <img data-link="https://www.postgresql.org/" id="postgres-logo" src="../resources/postgres-logo.png" alt="PostgreSQL Logo">
             <h3>PostgreSQL</h3>
 
             <p>
@@ -71,7 +71,7 @@
             <div style="border-top: 1px solid black; padding-bottom: 0.3em;"></div>
 
             <h4>ERD Diagram</h4>
-            <img src="resources/ERD.png" alt="Database ERD">
+            <img src="../resources/ERD.png" alt="Database ERD">
             <br>
 
             <button id="show-schema-button">Show Schema</button>
@@ -115,6 +115,6 @@
         </div>
     </div>
 
-    <script src="src/about.js"></script>
+    <script src="../src/about.js"></script>
 </body>
 </html>
