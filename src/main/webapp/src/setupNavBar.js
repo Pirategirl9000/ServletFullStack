@@ -1,9 +1,9 @@
 const nav = document.querySelector("nav");
 const navElements = [
-    {text: "Home", link: "index.html"},
-    {text: "Browse", link: "browse.html"},
-    {text: "About", link: "about.html"},
-    {text: "Contact Us", link: "contact.html"}
+    {text: "Home", link: "/home"},
+    {text: "Browse", link: "/browse"},
+    {text: "About", link: "/about"},
+    {text: "Contact Us", link: "/contact"}
 ]
 
 /**
@@ -16,7 +16,7 @@ function initializeNavBar() {
 
         // Add the relevant info to the div elements
         newElement.textContent = element.text;
-        newElement.addEventListener("click", ()=>location.href=element.link);
+        newElement.addEventListener("click", ()=> location.href = element.link);
 
         // Add the nav element
         nav.appendChild(newElement);
