@@ -38,13 +38,10 @@ public class EmailController extends HttpServlet {
      * @throws IOException if an error occurs during IO
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Set up to read the request body
         BufferedReader reader = request.getReader();
 
-        // Set up a JSON parser
         Gson gson = new Gson();
 
-        // Parse the JSON into a data carrier class for easy accessing
         EmailRequest requestBody = gson.fromJson(reader, EmailRequest.class);
 
         // Grab the values of the body so we can send our email
