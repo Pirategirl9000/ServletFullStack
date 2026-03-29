@@ -3,12 +3,12 @@ h1 {
     display: flex;
     justify-content: center;
     margin-left: auto;
-    background: darkturquoise;
+    background: #4e4ef3;
     padding: 0.5em;
 }
 
 body {
-    background: #e4f1fe;
+    background: #D4F7EC;
 }
 
 p {

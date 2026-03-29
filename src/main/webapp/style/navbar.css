@@ -4,14 +4,14 @@ body {
 }
 
 nav {
-    background: dodgerblue;
+    background: #1259DE;
     margin: 0;
     display: flex;
     border: 1px solid black;
 }
 
 nav div:hover {
-    background: cornflowerblue;
+    background: #3131E3;
     cursor: pointer;
 }
 
