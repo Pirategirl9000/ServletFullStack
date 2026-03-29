@@ -9,15 +9,15 @@
 </head>
 <body>
 
-<nav></nav>
-<script src="${pageContext.request.contextPath}/src/setupNavBar.js"></script>
+    <%@ include file="header.jsp"%>
+    <script src="${pageContext.request.contextPath}/src/setupNavBar.js"></script>
 
 
 
-<h1>Home</h1>
+    <h1>Home</h1>
 
-<p>Welcome to my demonstration of Java servlets!</p>
-<p>Please feel free to explore the web application at your leisure</p>
+    <p>Welcome to my demonstration of Java servlets!</p>
+    <p>Please feel free to explore the web application at your leisure</p>
 
 </body>
 </html>

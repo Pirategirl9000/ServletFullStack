@@ -10,35 +10,35 @@
 </head>
 
 <body>
-<nav></nav>
-<script src="${pageContext.request.contextPath}/src/setupNavBar.js"></script>
+    <%@ include file="header.jsp"%>
+    <script src="${pageContext.request.contextPath}/src/setupNavBar.js"></script>
 
-<h1>Contact Us</h1>
+    <h1>Contact Us</h1>
 
-<form id="email-form" method="POST">
-    <table>
-        <tr>
-            <td><label for="from">From: </label></td>
-            <td><input id="from" name="from" type="email"><span> *</span></td>
-        </tr>
+    <form id="email-form" method="POST">
+        <table>
+            <tr>
+                <td><label for="from">From: </label></td>
+                <td><input id="from" name="from" type="email"><span> *</span></td>
+            </tr>
 
-        <tr>
-            <td><label for="subject">Subject: </label></td>
-            <td><input id="subject" name="subject" type="text"><span> *</span></td>
-        </tr>
-        <tr>
-            <td><label for="body">Body: </label><span>*</span></td>
-        </tr>
-    </table>
-    <textarea id="body" name="body"></textarea>
+            <tr>
+                <td><label for="subject">Subject: </label></td>
+                <td><input id="subject" name="subject" type="text"><span> *</span></td>
+            </tr>
+            <tr>
+                <td><label for="body">Body: </label><span>*</span></td>
+            </tr>
+        </table>
+        <textarea id="body" name="body"></textarea>
 
-    <br>
-    <input id="submit" type="submit">
-</form>
+        <br>
+        <input id="submit" type="submit">
+    </form>
 
-<p id="email-confirm"></p>
+    <p id="email-confirm"></p>
 
-<script src="${pageContext.request.contextPath}/src/contact.js"></script>
+    <script src="${pageContext.request.contextPath}/src/contact.js"></script>
 
 </body>
 </html>

@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <nav></nav>
+    <%@ include file="header.jsp"%>
     <script src="${pageContext.request.contextPath}/src/setupNavBar.js"></script>
 
     <h1>About</h1>
