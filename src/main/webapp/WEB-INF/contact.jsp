@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Servlets Contact Us</title>
-    <link href="../style/fonts.css" rel="stylesheet">
-    <link href="../style/contact.css" rel="stylesheet">
-    <link href="../style/navbar.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/style/fonts.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/style/contact.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/style/navbar.css" rel="stylesheet">
 </head>
 
 <body>
 <nav></nav>
-<script src="../src/setupNavBar.js"></script>
+<script src="${pageContext.request.contextPath}/src/setupNavBar.js"></script>
 
 <h1>Contact Us</h1>
 
@@ -37,7 +37,7 @@
 
 <p id="email-confirm"></p>
 
-<script src="../src/contact.js"></script>
+<script src="${pageContext.request.contextPath}/src/contact.js"></script>
 
 </body>
 </html>
