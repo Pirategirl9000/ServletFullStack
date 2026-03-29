@@ -4,13 +4,11 @@
 <head>
     <link href="${pageContext.request.contextPath}/style/fonts.css" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/style/index.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/style/navbar.css">
     <title>Servlets Home</title>
 </head>
 <body>
 
     <%@ include file="header.jsp"%>
-    <script src="${pageContext.request.contextPath}/src/setupNavBar.js"></script>
 
 
 

@@ -6,12 +6,10 @@
     <title>Servlets Contact Us</title>
     <link href="${pageContext.request.contextPath}/style/fonts.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/style/contact.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/style/navbar.css" rel="stylesheet">
 </head>
 
 <body>
     <%@ include file="header.jsp"%>
-    <script src="${pageContext.request.contextPath}/src/setupNavBar.js"></script>
 
     <h1>Contact Us</h1>
 
