@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <div th:fragment="header">
+        <link th:href="@{/style/navbar.css}" rel="stylesheet">
+
+        <nav>
+            <div th:data-link="@{/home}">Home</div>
+            <div th:data-link="@{/browse}">Browse</div>
+            <div th:data-link="@{/about}">About</div>
+            <div th:data-link="@{/contact}">Contact Us</div>
+        </nav>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                for (const element of document.querySelectorAll("nav div"))
+                    element.addEventListener("click", ()=>location.href=element.getAttribute("data-link"));
+            });
+        </script>
+    </div>
+</html>
