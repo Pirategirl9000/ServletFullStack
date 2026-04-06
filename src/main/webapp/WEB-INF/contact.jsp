@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <%@ include file="header.jsp"%>
+    <%@ include file="header.jspf"%>
 
     <h1>Contact Us</h1>
 
