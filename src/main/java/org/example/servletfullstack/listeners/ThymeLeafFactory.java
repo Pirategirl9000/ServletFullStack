@@ -12,7 +12,7 @@ public class ThymeLeafFactory implements ServletContextListener {
 
         // Set up the template resolver for the thymleaf engine
         ClassLoaderTemplateResolver resolver = new ClassLoaderTemplateResolver();
-        resolver.setPrefix("WEB-INF/templates/");
+        resolver.setPrefix("/templates/");
         resolver.setSuffix(".html");
         resolver.setTemplateMode("HTML5");
         resolver.setCharacterEncoding("UTF-8");
