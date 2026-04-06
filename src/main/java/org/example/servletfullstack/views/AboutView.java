@@ -8,9 +8,30 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name="AboutController", urlPatterns = "/about")
+/**
+ * The view for the /about webpage
+ */
+@WebServlet(name="AboutView", urlPatterns = "/about")
 public class AboutView extends HttpServlet {
+    /**
+     * The cached webpage
+     */
+    private String page;
+
+    /**
+     * Returns the /about webpage
+     * @param request an {@link HttpServletRequest} object that contains the request the client has made of the servlet
+     * @param response an {@link HttpServletResponse} object that contains the response the servlet sends to the client
+     * @throws ServletException if servlet exception occured
+     * @throws IOException if input or output exception occured
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.getServletContext().getRequestDispatcher("/WEB-INF/about.jsp").forward(request, response);
+        response.setContentType("text/html");
+        if (this.page != null) {
+            response.getWriter().println(this.page);
+        } else {
+            this.page = ThymeleafFacade.requestPage("about", request, response);
+            response.getWriter().println(this.page);
+        }
     }
 }
