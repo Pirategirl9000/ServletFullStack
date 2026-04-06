@@ -5,8 +5,12 @@ import jakarta.servlet.ServletContext;
 
 import java.util.Map;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
+import org.thymeleaf.context.WebContext;
+import org.thymeleaf.web.IWebExchange;
+import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 /**
  * Helper class for working with Thymeleaf. Allows for easy requesting of web pages that need building by Thymeleaf
@@ -20,25 +24,30 @@ public class ThymeleafFacade {
     /**
      * Processes the template page with the given variables and then returns the HTML as a String
      * @param templateName The name of the page/template requested
-     * @param sctx The servlet context for this request
+     * @param request The HTTP request for this page
+     * @param response the HTTP reesponse for this page
      * @param variables Any thymleaf variables that need to be set
      * @return the resultant page as a String
      */
-    public static String requestPage(String templateName, ServletContext sctx, Map<String, Object> variables) {
-        Context ctx = new Context();
+    public static String requestPage(String templateName, HttpServletRequest request, HttpServletResponse response, Map<String, Object> variables) {
+        JakartaServletWebApplication webApplication = JakartaServletWebApplication.buildApplication(request.getServletContext());
+        IWebExchange exchange = webApplication.buildExchange(request, response);
+
+        WebContext ctx = new WebContext(exchange, request.getLocale());
         ctx.setVariables(variables);
 
         // Prepare the page and send it back as a String of HTML
-        return ((TemplateEngine) sctx.getAttribute("thymeleaf")).process(templateName, ctx);
+        return ((TemplateEngine) request.getServletContext().getAttribute("thymeleaf")).process(templateName, ctx);
     }
 
     /**
      * Processes the template page without any thymeleaf variables and returns the HTML as a String
      * @param templateName The name of the page/template requested
-     * @param sctx The servlet context for this request
+     * @param request The HTTP request for this page
+     * @param response the HTTP reesponse for this page
      * @return The resultant page as a String
      */
-    public static String requestPage(String templateName, ServletContext sctx) {
-        return requestPage(templateName, sctx, null);
+    public static String requestPage(String templateName, HttpServletRequest request, HttpServletResponse response) {
+        return requestPage(templateName, request, response, null);
     }
 }
