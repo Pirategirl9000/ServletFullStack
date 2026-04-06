@@ -12,6 +12,10 @@ import org.thymeleaf.context.Context;
  * Helper class for working with Thymeleaf. Allows for easy requesting of web pages that need building by Thymeleaf
  */
 public class ThymeleafFacade {
+    /**
+     * This is a helper class and cannot be instantiated
+     */
+    private ThymeleafFacade() {/* noop */}
 
     /**
      * Processes the template page with the given variables and then returns the HTML as a String
@@ -20,7 +24,7 @@ public class ThymeleafFacade {
      * @param variables Any thymleaf variables that need to be set
      * @return the resultant page as a String
      */
-    public String requestPage(String templateName, ServletContext sctx, Map<String, Object> variables) {
+    public static String requestPage(String templateName, ServletContext sctx, Map<String, Object> variables) {
         Context ctx = new Context();
         ctx.setVariables(variables);
 
@@ -34,7 +38,7 @@ public class ThymeleafFacade {
      * @param sctx The servlet context for this request
      * @return The resultant page as a String
      */
-    public String requestPage(String templateName, ServletContext sctx) {
-        return this.requestPage(templateName, sctx, null);
+    public static String requestPage(String templateName, ServletContext sctx) {
+        return requestPage(templateName, sctx, null);
     }
 }
