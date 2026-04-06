@@ -1,8 +1,6 @@
 package org.example.servletfullstack.views;
 
 
-import jakarta.servlet.ServletContext;
-
 import java.util.Map;
 
 import jakarta.servlet.http.HttpServletRequest;
