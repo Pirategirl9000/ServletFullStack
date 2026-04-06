@@ -1,7 +1,7 @@
 package org.example.servletfullstack.views;
 
 
-import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.ServletContext;
 
 import java.util.Map;
 
@@ -16,25 +16,25 @@ public class ThymeleafFacade {
     /**
      * Processes the template page with the given variables and then returns the HTML as a String
      * @param templateName The name of the page/template requested
-     * @param request The HTTP request sent for this page, used to acquire the servlet context
+     * @param sctx The servlet context for this request
      * @param variables Any thymleaf variables that need to be set
      * @return the resultant page as a String
      */
-    public String requestPage(String templateName, HttpServletRequest request, Map<String, Object> variables) {
+    public String requestPage(String templateName, ServletContext sctx, Map<String, Object> variables) {
         Context ctx = new Context();
         ctx.setVariables(variables);
 
         // Prepare the page and send it back as a String of HTML
-        return ((TemplateEngine) request.getServletContext().getAttribute("thymeleaf")).process(templateName, ctx);
+        return ((TemplateEngine) sctx.getAttribute("thymeleaf")).process(templateName, ctx);
     }
 
     /**
      * Processes the template page without any thymeleaf variables and returns the HTML as a String
      * @param templateName The name of the page/template requested
-     * @param request The HTTP request sent for this page, used to acquire the servlet context
+     * @param sctx The servlet context for this request
      * @return The resultant page as a String
      */
-    public String requestPage(String templateName, HttpServletRequest request) {
-        return this.requestPage(templateName, request, null);
+    public String requestPage(String templateName, ServletContext sctx) {
+        return this.requestPage(templateName, sctx, null);
     }
 }
