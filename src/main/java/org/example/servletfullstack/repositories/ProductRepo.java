@@ -2,6 +2,7 @@ package org.example.servletfullstack.repositories;
 
 // contains sensitive database configuration details
 // This is why it is not included in the GitHub repository
+import com.google.gson.Gson;
 import org.example.resources.DatabaseConfig;
 
 import org.example.servletfullstack.repositories.objects.Product;
@@ -63,7 +64,7 @@ public class ProductRepo {
      * @return ProductRepo object
      */
     synchronized public static ProductRepo getProductRepo() {
-        if (productRepo == null) productRepo = new ProductRepo();
+        if (productRepo == null) { productRepo = new ProductRepo(); }
 
         return productRepo;
     }
@@ -76,7 +77,9 @@ public class ProductRepo {
         // If we have already fetched the products from the database we just return the memoized list
         // We will pull from the database again based on how much time has passed just in case the database updates
         // during uptime
-        if (this.products == null || System.nanoTime() - this.lastUpdate >= DURATIONTILLUPDATE) this.products = fetchProducts();
+        if (this.products == null || System.nanoTime() - this.lastUpdate >= DURATIONTILLUPDATE) {
+            this.products = fetchProducts();
+        }
 
         return this.products;
     }
@@ -85,43 +88,47 @@ public class ProductRepo {
      * Fetches all products from the database and assigns them to the products attribute
      */
     synchronized private List<Product> fetchProducts() {
-        List<Product> newList = new ArrayList<>();
-        Connection conn = getConnection();
+        final String query =
+                "select p.*, JSON_AGG(c.category_name) AS categories from products p " +
+                "INNER JOIN categories c ON p.product_id = c.product_id " +
+                "GROUP BY p.product_id;";
 
-        try {
-            // Prepare and execute a statement to query the database for all products
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(
-                    "select p.*, JSON_AGG(c.category_name) AS categories from products p " +
-                        "INNER JOIN categories c ON p.product_id = c.product_id " +
-                        "GROUP BY p.product_id;"
-            );
+        final List<Product> newProducts = new ArrayList<>();
 
-            // Go through every row of data and create a product from it to add to the array
+        try (
+                Connection conn = getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+        ) {
+
+            // Map our result to Product objects
             while (rs.next()) {
-                newList.add(
-                        new Product(
-                                rs.getInt("product_id"),
-                                rs.getString("product_name"),
-                                rs.getString("product_desc"),
-                                rs.getDouble("product_price"),
-                                rs.getString("categories")                      // Get the categories as a string
-                                        .replaceAll("[\\[\\]\" ]", "")    // Remove brackets, quotations, and spaces
-                                        .split(",")                                  // Return the String as a string array
-                        )
-                );
+                newProducts.add(mapProduct(rs));
             }
 
-            rs.close();
-            stmt.close();
-            conn.close();
+
         } catch (SQLException e) {
-            try {conn.close();} catch (SQLException b) {throw new RuntimeException("Error executing query and closing connection: " + e.getMessage());}
             throw new RuntimeException("Error executing query: " + e.getMessage());
         }
 
-        // Track the last time we updated our memoized data
+        // Update when we last queried the database
         this.lastUpdate = System.nanoTime();
-        return newList;
+        return newProducts;
+    }
+
+    /**
+     * Maps the database row to a Product object
+     * @param rs The result set of the query
+     * @return A product object matching the query row
+     * @throws SQLException if any column labels are invalid
+     */
+    private Product mapProduct(ResultSet rs) throws SQLException {
+        return new Product(
+                rs.getInt("product_id"),
+                rs.getString("product_name"),
+                rs.getString("product_desc"),
+                rs.getDouble("product_price"),
+                new Gson().fromJson(rs.getString("categories"), String[].class)
+        );
     }
 }
