@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.example.servletfullstack.services.ProductService;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * Handles HTTP requests sent to the server and delegates the work to the service layer
