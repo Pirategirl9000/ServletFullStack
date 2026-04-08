@@ -13,7 +13,7 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 /**
  * Helper class for working with Thymeleaf. Allows for easy requesting of web pages that need building by Thymeleaf
  */
-public class ThymeleafFacade {
+class ThymeleafFacade {
     /**
      * This is a helper class and cannot be instantiated
      */
@@ -27,7 +27,7 @@ public class ThymeleafFacade {
      * @param variables Any thymleaf variables that need to be set
      * @return the resultant page as a String
      */
-    public static String requestPage(String templateName, HttpServletRequest request, HttpServletResponse response, Map<String, Object> variables) {
+    protected static String requestPage(String templateName, HttpServletRequest request, HttpServletResponse response, Map<String, Object> variables) {
         JakartaServletWebApplication webApplication = JakartaServletWebApplication.buildApplication(request.getServletContext());
         IWebExchange exchange = webApplication.buildExchange(request, response);
 
@@ -45,7 +45,7 @@ public class ThymeleafFacade {
      * @param response the HTTP reesponse for this page
      * @return The resultant page as a String
      */
-    public static String requestPage(String templateName, HttpServletRequest request, HttpServletResponse response) {
+    protected static String requestPage(String templateName, HttpServletRequest request, HttpServletResponse response) {
         return requestPage(templateName, request, response, null);
     }
 }
