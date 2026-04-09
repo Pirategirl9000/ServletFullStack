@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.servletfullstack.services.ProductService;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +15,17 @@ import java.io.PrintWriter;
  */
 @WebServlet(name="BrowseView", urlPatterns = "/browse")
 public class BrowseView extends HttpServlet {
+    /**
+     * Handles the operations related to requests the controller recieves
+     */
+    private ProductService productService;
+
+    /**
+     * Code that runs when the Servlet is initialilized
+     */
+    public void init() {
+        this.productService = ProductService.getProductService();
+    }
 
     /**
      * Returns the /browse webpage
