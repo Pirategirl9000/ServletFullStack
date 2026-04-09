@@ -5,7 +5,7 @@ package org.example.servletfullstack.repositories;
 import org.example.resources.DatabaseConfig;
 
 import com.google.gson.Gson;
-import org.example.servletfullstack.repositories.objects.Product;
+import org.example.servletfullstack.models.Product;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;

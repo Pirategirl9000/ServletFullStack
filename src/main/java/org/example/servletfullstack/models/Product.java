@@ -1,4 +1,4 @@
-package org.example.servletfullstack.repositories.objects;
+package org.example.servletfullstack.models;
 
 /**
  * Data carrier class for product items retrieved from the database

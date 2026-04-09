@@ -2,7 +2,7 @@ package org.example.servletfullstack.services;
 
 import com.google.gson.Gson;
 import org.example.servletfullstack.repositories.ProductRepo;
-import org.example.servletfullstack.repositories.objects.Product;
+import org.example.servletfullstack.models.Product;
 
 /**
  * Handles the operations passed to it by the Controller layer. Is a singleton class to prevent database access issues
