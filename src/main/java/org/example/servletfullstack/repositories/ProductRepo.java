@@ -2,9 +2,9 @@ package org.example.servletfullstack.repositories;
 
 // contains sensitive database configuration details
 // This is why it is not included in the GitHub repository
-import com.google.gson.Gson;
 import org.example.resources.DatabaseConfig;
 
+import com.google.gson.Gson;
 import org.example.servletfullstack.repositories.objects.Product;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
