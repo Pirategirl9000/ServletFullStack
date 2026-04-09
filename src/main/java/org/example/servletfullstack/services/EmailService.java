@@ -1,9 +1,6 @@
 package org.example.servletfullstack.services;
 
-import jakarta.mail.Authenticator;
-import jakarta.mail.PasswordAuthentication;
-import jakarta.mail.Session;
-import jakarta.mail.Transport;
+import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import org.example.resources.MailConfig;
@@ -22,12 +19,15 @@ public class EmailService {
     /**
      * The properties for the email session
      */
-    private final Properties props = new Properties();
+    private static final Properties props = new Properties();
 
     /**
      * A private constructor for EmailService to acheive singleton status
      */
-    private EmailService() {
+    private EmailService() {}
+
+    // Set up the props in a static block to avoid reallocation in case of class extension
+    static {
         props.put("mail.smtp.host", MailConfig.HOST);   // Which service to use
         props.put("mail.smtp.auth", "true");            // Use authentication
         props.put("mail.smtp.port", "465");             // SSL port
@@ -39,7 +39,7 @@ public class EmailService {
      * @return EmailService object
      */
     synchronized public static EmailService getEmailService() {
-        if (emailService == null) emailService = new EmailService();
+        if (emailService == null) { emailService = new EmailService(); }
 
         return emailService;
     }
@@ -59,30 +59,55 @@ public class EmailService {
         // Format the subject into Sender: Subject
         subject = String.format("%s: %s", sender, subject);
 
-        // Set up the session
-        Session session = Session.getInstance(props, new Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(FROM, PASSWORD);
-            }
-        });
-
         try {
-            // Create the blank message
-            MimeMessage message = new MimeMessage(session);
+            // Create an SMTP session for sending the message over
+            Session session = createSession(FROM, PASSWORD);
 
-            // Set up the email message
-            message.setFrom(new InternetAddress(FROM));
-            message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(TO));
-            message.setSubject(subject);
-            message.setText(text, "UTF-8");
+            // Create and send the message
+            Transport.send(createMessage(FROM, session, TO, subject, text));
 
-            // Send the message
-            Transport.send(message);
-
-            return true;
-        } catch (Exception e) {
-            System.out.println("Failed to send message: " + e.getMessage());
+        } catch (MessagingException e) {
+            System.out.println("Failed to send email");
             return false;
         }
+
+        // true indicates the message was successfully sent
+        return true;
+    }
+
+    /**
+     * Creates a new session based on the props and who's sending the email
+     * @param from The email address of who's sending the email
+     * @param password The app password for the sender
+     * @return Session object to send message over
+     */
+    private Session createSession(String from, String password) {
+        return Session.getInstance(props, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(from, password);
+            }
+        });
+    }
+
+    /**
+     * Creates an email message object
+     * @param from Who's sending the message
+     * @param to Who to send the email to
+     * @param subject The subject of the email
+     * @param text The body of the email
+     * @return MimeMessage ready for sending
+     * @throws MessagingException If an error occurs when trying to build the message
+     */
+    private MimeMessage createMessage(String from, Session session, String to, String subject, String text) throws MessagingException {
+        // Create the blank message
+        MimeMessage message = new MimeMessage(session);
+
+        // Set up the email message
+        message.setFrom(new InternetAddress(from));
+        message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(to));
+        message.setSubject(subject);
+        message.setContent(text, "text/plain");
+
+        return message;
     }
 }
