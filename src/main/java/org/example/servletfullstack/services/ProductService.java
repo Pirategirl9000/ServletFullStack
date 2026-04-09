@@ -2,6 +2,7 @@ package org.example.servletfullstack.services;
 
 import com.google.gson.Gson;
 import org.example.servletfullstack.repositories.ProductRepo;
+import org.example.servletfullstack.repositories.objects.Product;
 
 /**
  * Handles the operations passed to it by the Controller layer. Is a singleton class to prevent database access issues
@@ -43,7 +44,7 @@ public class ProductService {
      * Returns all products in a JSON formatted string
      * @return JSON formatted string
      */
-    public String getProducts() {
-        return JSONParser.toJson(productRepo.getAllProducts());
+    public Product[] getProducts() {
+        return productRepo.getAllProducts().toArray(Product[]::new);
     }
 }
