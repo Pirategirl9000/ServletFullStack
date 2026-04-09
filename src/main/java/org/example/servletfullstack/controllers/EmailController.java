@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 /**
  * Handles HTTP requests sent to the server and delegates the work to the service layer
  */
-@WebServlet(name = "productController", value = "/api/email")
+@WebServlet(name = "emailController", value = "/api/email")
 public class EmailController extends HttpServlet {
     /**
      * Handles the operations related to requests the controller recieves
