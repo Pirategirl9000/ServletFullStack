@@ -9,6 +9,7 @@ import org.example.servletfullstack.services.ProductService;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 
 /**
  * The view for the /browse webpage
@@ -38,9 +39,8 @@ public class BrowseView extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        //TODO: Build this webpage with the mappings
-
-        out.println(ThymeleafFacade.requestPage("browse", request, response));
+        Map<String, Object> products = Map.of("products", productService.getProducts());
+        out.println(ThymeleafFacade.requestPage("browse", request, response, products));
     }
 
 }
