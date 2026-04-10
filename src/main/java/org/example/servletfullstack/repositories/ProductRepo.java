@@ -18,7 +18,7 @@ public class ProductRepo {
     /**
      * The singleton instance of the ProductRepo
      */
-    private static ProductRepo productRepo;
+    private static volatile ProductRepo productRepo;
 
     /**
      * A list of all the prodcuts in the database
@@ -63,8 +63,10 @@ public class ProductRepo {
      * Returns the reference to a ProductRepo object
      * @return ProductRepo object
      */
-    synchronized public static ProductRepo getProductRepo() {
-        if (productRepo == null) { productRepo = new ProductRepo(); }
+    public static ProductRepo getProductRepo() {
+        synchronized (ProductRepo.class) {
+            if (productRepo == null) { productRepo = new ProductRepo(); }
+        }
 
         return productRepo;
     }
