@@ -11,7 +11,7 @@ public class ProductService {
     /**
      * The singleton instance of the ProductService
      */
-    private static ProductService productService;
+    private static volatile ProductService productService;
 
     /**
      * Reference to the Product Repository which handles the database
@@ -34,8 +34,10 @@ public class ProductService {
      * Returns the reference to a ProductService object
      * @return ProductService object
      */
-    synchronized public static ProductService getProductService() {
-        if (productService == null) productService = new ProductService();
+    public static ProductService getProductService() {
+        synchronized (ProductService.class) {
+            if (productService == null) productService = new ProductService();
+        }
 
         return productService;
     }
