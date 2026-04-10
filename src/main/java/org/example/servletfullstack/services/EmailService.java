@@ -18,7 +18,7 @@ public class EmailService {
     /**
      * The singleton instance of the EmailService
      */
-    private static EmailService emailService;
+    private static volatile EmailService emailService;
 
     /**
      * The properties for the email session
@@ -42,8 +42,10 @@ public class EmailService {
      * Returns the reference to a EmailService object
      * @return EmailService object
      */
-    synchronized public static EmailService getEmailService() {
-        if (emailService == null) { emailService = new EmailService(); }
+    public static EmailService getEmailService() {
+        synchronized (EmailService.class) {
+            if (emailService == null) { emailService = new EmailService(); }
+        }
 
         return emailService;
     }
