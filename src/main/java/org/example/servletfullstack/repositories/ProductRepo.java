@@ -75,10 +75,7 @@ public class ProductRepo {
      * Queries the database for all products and returns a list of Product objects
      * @return list of product objects
      */
-    public List<Product> getAllProducts() {
-        // If we have already fetched the products from the database we just return the memoized list
-        // We will pull from the database again based on how much time has passed just in case the database updates
-        // during uptime
+    synchronized public List<Product> getAllProducts() {
         if (this.products == null || System.nanoTime() - this.lastUpdate >= DURATIONTILLUPDATE) {
             this.products = fetchProducts();
         }
