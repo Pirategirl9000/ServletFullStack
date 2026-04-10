@@ -89,7 +89,7 @@ public class ProductRepo {
     /**
      * Fetches all products from the database and assigns them to the products attribute
      */
-    synchronized private List<Product> fetchProducts() {
+    private List<Product> fetchProducts() {
         final String query =
                 "select p.*, JSON_AGG(c.category_name) AS categories from products p " +
                 "INNER JOIN categories c ON p.product_id = c.product_id " +
