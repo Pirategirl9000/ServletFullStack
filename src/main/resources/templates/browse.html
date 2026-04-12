@@ -12,8 +12,13 @@
 <div th:replace="fragments/header.html :: header"></div>
 
 <div id="products">
-    <div th:each="product: ${products}">
-        <h1 th:text="${product.name}"></h1>
+    <div class="product-tile" th:each="product: ${products}" th:data-product-id="${product.id}">
+        <p class="product-name" th:text="${product.name}"></p>
+        <p class="product-description" th:text="${product.description}"></p>
+        <div th:each="category: ${product.categories}" class="product-categories">
+            <p class="category" th:text="${category}"></p>
+        </div>
+        <p class="product-price" th:text="${product.price}"></p>
     </div>
 </div>
 
