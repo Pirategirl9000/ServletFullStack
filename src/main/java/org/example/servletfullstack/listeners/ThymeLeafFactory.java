@@ -31,5 +31,6 @@ public class ThymeLeafFactory implements ServletContextListener {
 
         // Add the engine to our servlet context so servlets can access it
         sce.getServletContext().setAttribute("thymeleaf", engine);
+        sce.getServletContext().log("Thymeleaf context initialized");
     }
 }
