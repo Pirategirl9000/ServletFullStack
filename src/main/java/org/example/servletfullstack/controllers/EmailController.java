@@ -27,8 +27,8 @@ public class EmailController extends HttpServlet {
      * Code that runs when the Servlet is initialilized
      */
     public void init() {
-        log("Email Controller Initialized");
         this.emailService = EmailService.getEmailService();
+        log("Email Controller Initialized");
     }
 
     /**
