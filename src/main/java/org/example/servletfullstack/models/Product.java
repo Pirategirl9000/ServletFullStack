@@ -8,4 +8,4 @@ package org.example.servletfullstack.models;
  * @param price the price of the product
  * @param categories the categories this product falls under
  */
-public record Product(int id, String name, String description, double price, String[] categories){}
+public record Product(int id, String name, String description, String price, String[] categories){}

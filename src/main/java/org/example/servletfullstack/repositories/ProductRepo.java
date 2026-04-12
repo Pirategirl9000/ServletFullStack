@@ -126,7 +126,7 @@ public class ProductRepo {
                 rs.getInt("product_id"),
                 rs.getString("product_name"),
                 rs.getString("product_desc"),
-                rs.getDouble("product_price"),
+                "$" + rs.getDouble("product_price"),
                 new Gson().fromJson(rs.getString("categories"), String[].class)
         );
     }
