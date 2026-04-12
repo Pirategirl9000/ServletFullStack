@@ -15,6 +15,10 @@ public class HomeView extends HttpServlet {
      */
     private String page;
 
+    public void init() {
+        log("Home View Initialized");
+    }
+
     /**
      * Returns the /home webpage
      * @param request an {@link HttpServletRequest} object that contains the request the client has made of the servlet
@@ -30,5 +34,9 @@ public class HomeView extends HttpServlet {
             this.page = ThymeleafFacade.requestPage("home", request, response);
             response.getWriter().println(this.page);
         }
+    }
+
+    public void destroy() {
+        log("Home View Destroyed");
     }
 }

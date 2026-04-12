@@ -18,6 +18,10 @@ public class ContactView extends HttpServlet {
      */
     private String page;
 
+    public void init() {
+        log("Contact View Initialized");
+    }
+
     /**
      * Returns the /contact webpage
      * @param request an {@link HttpServletRequest} object that contains the request the client has made of the servlet
@@ -33,5 +37,9 @@ public class ContactView extends HttpServlet {
             this.page = ThymeleafFacade.requestPage("contact", request, response);
             response.getWriter().println(this.page);
         }
+    }
+
+    public void destroy() {
+        log("Contact View Destroyed");
     }
 }

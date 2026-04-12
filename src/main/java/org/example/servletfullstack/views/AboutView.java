@@ -18,6 +18,10 @@ public class AboutView extends HttpServlet {
      */
     private String page;
 
+    public void init() {
+        log("About View Initialized");
+    }
+
     /**
      * Returns the /about webpage
      * @param request an {@link HttpServletRequest} object that contains the request the client has made of the servlet
@@ -33,5 +37,9 @@ public class AboutView extends HttpServlet {
             this.page = ThymeleafFacade.requestPage("about", request, response);
             response.getWriter().println(this.page);
         }
+    }
+
+    public void destroy() {
+        log("About View Destroyed");
     }
 }
