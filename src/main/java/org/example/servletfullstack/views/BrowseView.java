@@ -5,10 +5,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.servletfullstack.models.Product;
 import org.example.servletfullstack.services.ProductService;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -25,6 +27,7 @@ public class BrowseView extends HttpServlet {
      * Code that runs when the Servlet is initialilized
      */
     public void init() {
+        log("Browse View Initialized");
         this.productService = ProductService.getProductService();
     }
 
@@ -38,9 +41,25 @@ public class BrowseView extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
+        Map<String, Object> variables = new HashMap<>();
 
-        Map<String, Object> products = Map.of("products", productService.getProducts());
-        out.println(ThymeleafFacade.requestPage("browse", request, response, products));
+        Product[] products = productService.getProducts();
+
+        if (products == null || products.length == 0) {
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Could not find products");
+            log("Internal Server Error: Failed to fetch products from database");
+            return;
+        }
+
+
+        variables.put("products", products);
+
+
+        out.println(ThymeleafFacade.requestPage("browse", request, response, variables));
+    }
+
+    public void destroy() {
+        log("Browse View Destroyed");
     }
 
 }
