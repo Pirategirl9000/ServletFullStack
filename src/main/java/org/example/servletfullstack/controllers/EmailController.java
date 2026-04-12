@@ -27,6 +27,7 @@ public class EmailController extends HttpServlet {
      * Code that runs when the Servlet is initialilized
      */
     public void init() {
+        log("Email Controller Initialized");
         this.emailService = EmailService.getEmailService();
     }
 
@@ -64,6 +65,7 @@ public class EmailController extends HttpServlet {
             out.println("Email sent!");
         } else {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+            log("Internal Server Error encountered when sending email");
         }
     }
 
@@ -71,6 +73,7 @@ public class EmailController extends HttpServlet {
      * Code that runs when Servlet is being terminated
      */
     public void destroy() {
+        log("Email Controller Destroyed");
     }
 
 
