@@ -13,7 +13,7 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 /**
  * Helper class for working with Thymeleaf. Allows for easy requesting of web pages that need building by Thymeleaf
  */
-class ThymeleafFacade {
+final class ThymeleafFacade {
     /**
      * This is a helper class and cannot be instantiated
      */
@@ -23,11 +23,11 @@ class ThymeleafFacade {
      * Processes the template page with the given variables and then returns the HTML as a String
      * @param templateName The name of the page/template requested
      * @param request The HTTP request for this page
-     * @param response the HTTP reesponse for this page
+     * @param response the HTTP response for this page
      * @param variables Any thymleaf variables that need to be set
      * @return the resultant page as a String
      */
-    protected static String requestPage(String templateName, HttpServletRequest request, HttpServletResponse response, Map<String, Object> variables) {
+    static String requestPage(String templateName, HttpServletRequest request, HttpServletResponse response, Map<String, Object> variables) {
         JakartaServletWebApplication webApplication = JakartaServletWebApplication.buildApplication(request.getServletContext());
         IWebExchange exchange = webApplication.buildExchange(request, response);
 
@@ -42,10 +42,10 @@ class ThymeleafFacade {
      * Processes the template page without any thymeleaf variables and returns the HTML as a String
      * @param templateName The name of the page/template requested
      * @param request The HTTP request for this page
-     * @param response the HTTP reesponse for this page
+     * @param response the HTTP response for this page
      * @return The resultant page as a String
      */
-    protected static String requestPage(String templateName, HttpServletRequest request, HttpServletResponse response) {
+    static String requestPage(String templateName, HttpServletRequest request, HttpServletResponse response) {
         return requestPage(templateName, request, response, null);
     }
 }
