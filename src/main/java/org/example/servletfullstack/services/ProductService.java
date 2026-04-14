@@ -1,6 +1,5 @@
 package org.example.servletfullstack.services;
 
-import com.google.gson.Gson;
 import org.example.servletfullstack.repositories.ProductRepo;
 import org.example.servletfullstack.models.Product;
 
@@ -17,11 +16,6 @@ public class ProductService {
      * Reference to the Product Repository which handles the database
      */
     private ProductRepo productRepo;
-
-    /**
-     * Parses objects to JSON formatted string
-     */
-    private Gson JSONParser = new Gson();
 
     /**
      * A private constructor for ProductService to acheive singleton status
@@ -43,8 +37,8 @@ public class ProductService {
     }
 
     /**
-     * Returns all products in a JSON formatted string
-     * @return JSON formatted string
+     * Returns all products in a Product[]
+     * @return Array of Product objects
      */
     public Product[] getProducts() {
         return productRepo.getAllProducts().toArray(Product[]::new);
