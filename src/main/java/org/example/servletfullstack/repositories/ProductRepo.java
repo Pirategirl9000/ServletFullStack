@@ -36,7 +36,7 @@ public class ProductRepo {
     private final long DURATIONTILLUPDATE = 600_000_000_000L;  // 10 Minutes
 
     /**
-     * A private constructor for ProductRepo to acheive singleton status, initializes the database connection
+     * A private constructor for ProductRepo to acheive singleton status, initializes the database driver
      */
     private ProductRepo() {
         // Set up the driver for PostgreSQL
