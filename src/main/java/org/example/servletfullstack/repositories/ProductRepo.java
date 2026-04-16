@@ -41,6 +41,7 @@ public class ProductRepo {
     private ProductRepo() {
         // Set up the driver for PostgreSQL
         try {
+            // Load the Driver class in by initializing static fields and running the static block which adds it to the driver manager
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Could not load PostgreSQL driver", e);
