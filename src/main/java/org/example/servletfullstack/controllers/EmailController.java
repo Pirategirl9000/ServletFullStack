@@ -12,7 +12,6 @@ import org.example.servletfullstack.services.EmailService;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
 
 /**
  * Handles HTTP requests sent to the server and delegates the work to the service layer
