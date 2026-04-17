@@ -6,11 +6,8 @@ import org.example.resources.DatabaseConfig;
 
 import com.google.gson.Gson;
 import org.example.servletfullstack.models.Product;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Connection;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +40,7 @@ public class ProductRepo {
         try {
             // Load the Driver class in by initializing static fields and running the static block which adds it to the driver manager
             Class.forName("org.postgresql.Driver");
+
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Could not load PostgreSQL driver", e);
         }
@@ -88,10 +86,10 @@ public class ProductRepo {
      * Fetches all products from the database and assigns them to the products attribute
      */
     private List<Product> fetchProducts() {
-        final String query =
-                "select p.*, JSON_AGG(c.category_name) AS categories from products p " +
-                "INNER JOIN categories c ON p.product_id = c.product_id " +
-                "GROUP BY p.product_id;";
+        final String query = """
+                select p.*, JSON_AGG(c.category_name) AS categories from products p \
+                INNER JOIN categories c ON p.product_id = c.product_id \
+                GROUP BY p.product_id;""";
 
         final List<Product> newProducts = new ArrayList<>();
 
