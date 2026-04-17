@@ -44,7 +44,8 @@ async function handleForm(e) {
     const response = await fetch("http://localhost:8080/ServletFullStack_war_exploded/api/email", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Accept": "*/*"
         },
         body: json
     })
