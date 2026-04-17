@@ -23,7 +23,7 @@ public class ThymeLeafFactory implements ServletContextListener {
         resolver.setSuffix(".html");
         resolver.setTemplateMode("HTML5");
         resolver.setCharacterEncoding("UTF-8");
-        resolver.setCacheTTLMs(3600000L);  // Cache any parsed template for 1 hour
+        resolver.setCacheTTLMs(3600000L);  // Cache any compiled template for 1 hour
 
         // Create and set up the template engine
         TemplateEngine engine = new TemplateEngine();
