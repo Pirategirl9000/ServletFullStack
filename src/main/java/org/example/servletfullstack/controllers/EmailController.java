@@ -12,6 +12,7 @@ import org.example.servletfullstack.services.EmailService;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 
 /**
  * Handles HTTP requests sent to the server and delegates the work to the service layer
@@ -58,10 +59,10 @@ public class EmailController extends HttpServlet {
 
         final boolean success = emailService.sendEmail(sender, subject, body);
 
-        response.setContentType("text/plain");
         PrintWriter out = response.getWriter();
 
         if (success) {
+            response.setContentType("text/plain");
             out.println("Email sent!");
         } else {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
