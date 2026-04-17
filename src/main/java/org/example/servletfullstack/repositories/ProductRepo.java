@@ -96,7 +96,7 @@ public class ProductRepo {
         try (
                 Connection conn = getConnection();
                 Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(query);
+                ResultSet rs = stmt.executeQuery(query)
         ) {
 
             // Map our result to Product objects
