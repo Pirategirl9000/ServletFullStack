@@ -18,6 +18,9 @@ public class AboutView extends HttpServlet {
      */
     private String page;
 
+    /**
+     * Code that runs when the Servlet is initialilized
+     */
     public void init() {
         log("About View Initialized");
     }
@@ -39,6 +42,9 @@ public class AboutView extends HttpServlet {
         }
     }
 
+    /**
+     * The code that runs when the servlet is destroyed
+     */
     public void destroy() {
         log("About View Destroyed");
     }

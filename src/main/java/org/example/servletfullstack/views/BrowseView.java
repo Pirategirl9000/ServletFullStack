@@ -58,6 +58,9 @@ public class BrowseView extends HttpServlet {
         out.println(ThymeleafFacade.requestPage("browse", request, response, variables));
     }
 
+    /**
+     * The code that runs when the servlet is destroyed
+     */
     public void destroy() {
         log("Browse View Destroyed");
     }

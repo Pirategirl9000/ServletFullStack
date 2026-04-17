@@ -15,6 +15,9 @@ public class HomeView extends HttpServlet {
      */
     private String page;
 
+    /**
+     * Code that runs when the Servlet is initialilized
+     */
     public void init() {
         log("Home View Initialized");
     }
@@ -36,6 +39,9 @@ public class HomeView extends HttpServlet {
         }
     }
 
+    /**
+     * The code that runs when the servlet is destroyed
+     */
     public void destroy() {
         log("Home View Destroyed");
     }
